@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { appointments as existingAppts } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { DoctorAppointment } from '@/lib/types';
 import {
   Calendar, Clock, MapPin, Plus, AlertTriangle,
@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 
 export default function AppointmentsPanel() {
-  const [allAppts, setAllAppts] = useState<DoctorAppointment[]>(existingAppts);
+  const { appointments: allAppts, setAppointments: setAllAppts } = useHealthData();
   const [showAddForm, setShowAddForm] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [view, setView] = useState<'upcoming' | 'past' | 'all'>('upcoming');

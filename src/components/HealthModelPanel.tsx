@@ -1,6 +1,6 @@
 'use client';
 
-import { healthScore, riskFactors, labTrends, vitalSigns } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { 
   Shield, AlertTriangle,
   CheckCircle, Activity, Heart, Brain, Zap, Droplets, Flame
@@ -36,6 +36,7 @@ const systemDescriptions: Record<string, string> = {
 };
 
 export default function HealthModelPanel() {
+  const { healthScore, riskFactors, labTrends, vitalSigns } = useHealthData();
   const radarData = Object.entries(healthScore)
     .filter(([key]) => key !== 'overall')
     .map(([key, value]) => ({

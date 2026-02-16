@@ -1,6 +1,6 @@
 'use client';
 
-import { healthScore, riskFactors, vitalSigns, labResults, appointments, symptoms, medications } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import {
   Heart, Activity, Droplets, Zap, Shield,
   AlertTriangle, TrendingUp, TrendingDown, Calendar,
@@ -16,6 +16,7 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ onNavigate }: DashboardProps) {
+  const { healthScore, riskFactors, vitalSigns, labResults, appointments, symptoms, medications } = useHealthData();
   const flaggedLabs = labResults.filter(l => l.flag !== 'normal');
   const upcomingAppts = appointments.filter(a => a.status === 'scheduled').sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).slice(0, 3);
   const recentSymptoms = symptoms.slice(0, 4);

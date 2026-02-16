@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { DataProvider } from '@/lib/DataContext';
 import {
   LayoutDashboard, FlaskConical, Stethoscope, Calendar, FileText,
   Clock, Brain, Activity, Menu, X, LogOut, Heart
@@ -49,6 +50,7 @@ export default function AppShell() {
   };
 
   return (
+    <DataProvider>
     <div className="min-h-screen bg-[#0a0a0f] flex">
       {/* Mobile menu button */}
       <button
@@ -119,5 +121,6 @@ export default function AppShell() {
         </div>
       </main>
     </div>
+    </DataProvider>
   );
 }

@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { labResults } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { FlaskConical, Search, Filter, TrendingUp, TrendingDown, Minus, AlertTriangle } from 'lucide-react';
 
 const categories = ['All', 'CBC', 'Metabolic', 'Lipids', 'Liver', 'Thyroid', 'Vitamins', 'Inflammatory', 'Hormones'];
 
 export default function LabsPanel() {
+  const { labResults } = useHealthData();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
   const [flagFilter, setFlagFilter] = useState<string>('all');
@@ -21,7 +22,7 @@ export default function LabsPanel() {
   const totalTests = labResults.length;
   const normalCount = labResults.filter(l => l.flag === 'normal').length;
   const flaggedCount = totalTests - normalCount;
-  const normalPct = Math.round((normalCount / totalTests) * 100);
+  const normalPct = totalTests > 0 ? Math.round((normalCount / totalTests) * 100) : 0;
 
   const getBarWidth = (value: number, min: number, max: number) => {
     const range = max - min;
@@ -213,7 +214,7 @@ export default function LabsPanel() {
               <div className="w-full h-1.5 bg-zinc-800 rounded-full mt-2">
                 <div
                   className={`h-full rounded-full ${catFlagged > 0 ? 'bg-yellow-400' : 'bg-green-400'}`}
-                  style={{ width: `${((catTests.length - catFlagged) / catTests.length) * 100}%` }}
+                  style={{ width: `${catTests.length > 0 ? ((catTests.length - catFlagged) / catTests.length) * 100 : 0}%` }}
                 />
               </div>
             </div>

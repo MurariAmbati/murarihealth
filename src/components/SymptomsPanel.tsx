@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { symptoms as existingSymptoms, symptomKeywords } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
+import { symptomKeywords } from '@/lib/data';
 import { Symptom } from '@/lib/types';
 import { Brain, Search, Plus, Lightbulb, Tag, Activity, Thermometer } from 'lucide-react';
 import {
@@ -12,7 +13,7 @@ import {
 const COLORS = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
 
 export default function SymptomsPanel() {
-  const [allSymptoms, setAllSymptoms] = useState<Symptom[]>(existingSymptoms);
+  const { symptoms: allSymptoms, setSymptoms: setAllSymptoms } = useHealthData();
   const [newSymptomText, setNewSymptomText] = useState('');
   const [newSeverity, setNewSeverity] = useState(5);
   const [nlpResult, setNlpResult] = useState<{

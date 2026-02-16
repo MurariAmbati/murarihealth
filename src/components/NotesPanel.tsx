@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { clinicianNotes } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { ChevronDown, ChevronUp, Clipboard, Stethoscope, Pill, Calendar, AlertCircle } from 'lucide-react';
 
 export default function NotesPanel() {
+  const { clinicianNotes } = useHealthData();
   const [expandedId, setExpandedId] = useState<string | null>(clinicianNotes[0]?.id || null);
 
   return (

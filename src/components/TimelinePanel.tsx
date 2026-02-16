@@ -1,6 +1,6 @@
 'use client';
 
-import { timelineEvents } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { 
   Clock, FlaskConical, Calendar, Brain, FileText, Pill, 
   Flag, AlertTriangle 
@@ -32,6 +32,7 @@ const severityDotColors: Record<string, string> = {
 };
 
 export default function TimelinePanel() {
+  const { timelineEvents } = useHealthData();
   const sortedEvents = [...timelineEvents].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

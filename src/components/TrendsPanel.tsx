@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { labTrends } from '@/lib/data';
+import { useHealthData } from '@/lib/DataContext';
 import { TrendingUp, TrendingDown, Minus, AlertTriangle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -11,6 +11,7 @@ import {
 const categories = ['All', 'Metabolic', 'Lipids', 'Vitamins', 'Inflammatory', 'Thyroid', 'CBC', 'Hormones'];
 
 export default function TrendsPanel() {
+  const { labTrends } = useHealthData();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedTest, setSelectedTest] = useState<string | null>(null);
 
